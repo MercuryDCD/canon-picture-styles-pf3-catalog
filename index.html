@@ -293,6 +293,188 @@
             color: var(--accent);
         }
 
+        /* CAMERA INSTALLATION GUIDE BUTTON */
+        .btn-help-guide {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 11px;
+            font-weight: 600;
+            padding: 2px 8px;
+            height: 25px;
+            border-radius: 6px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            line-height: 1;
+            white-space: nowrap;
+        }
+
+        .btn-help-guide:hover {
+            background: var(--bg-card-hover);
+            border-color: #38bdf8;
+            color: #38bdf8;
+        }
+
+        .btn-help-guide .help-icon svg {
+            display: block;
+            color: currentColor;
+        }
+
+        /* CAMERA INSTALLATION GUIDE MODAL (TOP LAYER DIALOG) */
+        .modal-help-dialog {
+            border: none;
+            background: transparent;
+            padding: clamp(12px, 2vw, 24px);
+            margin: auto;
+            width: min(840px, 94vw);
+            max-height: 90vh;
+            box-sizing: border-box;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            overflow: visible;
+            outline: none;
+            opacity: 0;
+            transition: opacity 0.2s ease, overlay 0.2s allow-discrete, display 0.2s allow-discrete;
+        }
+
+        .modal-help-dialog[open] {
+            display: flex;
+            opacity: 1;
+        }
+
+        @starting-style {
+            .modal-help-dialog[open] {
+                opacity: 0;
+            }
+        }
+
+        .modal-help-dialog::backdrop {
+            background: rgba(0, 0, 0, 0.78);
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            transition: opacity 0.2s ease, overlay 0.2s allow-discrete, display 0.2s allow-discrete;
+        }
+
+        .modal-help-dialog[open]::backdrop {
+            opacity: 1;
+        }
+
+        @starting-style {
+            .modal-help-dialog[open]::backdrop {
+                opacity: 0;
+            }
+        }
+
+        .modal-help-window {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-lg);
+            width: 100%;
+            max-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 24px 60px rgba(0,0,0,0.7);
+        }
+
+        .modal-help-header {
+            padding: 16px 20px;
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .modal-help-body {
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            font-size: 13px;
+            line-height: 1.5;
+            color: var(--text-main);
+        }
+
+        .guide-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        @media (max-width: 680px) {
+            .guide-columns { grid-template-columns: 1fr; }
+        }
+
+        .guide-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .guide-card.is-native { border-left: 3px solid #8b5cf6; }
+        .guide-card.is-lut { border-left: 3px solid #10b981; }
+
+        .guide-card-title {
+            font-weight: 700;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .guide-card-tool {
+            background: rgba(255,255,255,0.06);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            color: #38bdf8;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .guide-steps {
+            font-size: 12px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .guide-golden-box {
+            background: rgba(220, 38, 38, 0.08);
+            border: 1px solid rgba(220, 38, 38, 0.25);
+            border-radius: 8px;
+            padding: 14px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .guide-golden-title {
+            color: #f87171;
+            font-weight: 700;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .guide-tip-item {
+            font-size: 12px;
+            color: #e4e4e7;
+            line-height: 1.5;
+        }
+
         /* VIEWPORT-AWARE ANCHOR POSITIONED POPOVER PANEL */
         .donation-popover-panel {
             position: absolute;
@@ -1467,6 +1649,26 @@
             background: var(--accent);
             color: #000;
             box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .btn-download-quick.is-lut-btn {
+            color: #38bdf8;
+            border-color: rgba(56, 189, 248, 0.4);
+        }
+        .btn-download-quick.is-lut-btn:hover {
+            background: #0284c7;
+            color: #fff;
+            box-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
+        }
+
+        .btn-download-quick.is-native-btn {
+            color: #34d399;
+            border-color: rgba(52, 211, 153, 0.4);
+        }
+        .btn-download-quick.is-native-btn:hover {
+            background: #059669;
+            color: #fff;
+            box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
         }
 
         .card-footer {
@@ -2843,6 +3045,24 @@
             transform: translateY(-1px);
         }
 
+        .btn-download-modal.is-lut {
+            background: #0284c7;
+            color: #fff;
+        }
+        .btn-download-modal.is-lut:hover {
+            background: #0369a1;
+            box-shadow: 0 0 16px rgba(56, 189, 248, 0.45);
+        }
+
+        .btn-download-modal.is-native {
+            background: #059669;
+            color: #fff;
+        }
+        .btn-download-modal.is-native:hover {
+            background: #047857;
+            box-shadow: 0 0 16px rgba(16, 185, 129, 0.45);
+        }
+
         .btn-download-modal svg {
             display: block;
             flex-shrink: 0;
@@ -3310,6 +3530,14 @@
                 </div>
             </div>
 
+            <!-- Installation Guide Button -->
+            <button class="btn-help-guide" id="btnHelpGuide" type="button" title="Camera Installation Guide / Guía de Instalación en Cámara" aria-label="Camera Installation Guide" data-i18n-title="guide.btn_title">
+                <span class="help-icon">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                </span>
+                <span data-i18n="guide.btn_label">Guía</span>
+            </button>
+
             <!-- Language Switcher (ES / EN) -->
             <button class="btn-lang-switcher" id="btnLangToggle" type="button" title="Switch language / Cambiar idioma" aria-label="Switch language / Cambiar idioma" data-i18n-title="meta.lang_switch_title">
                 <span class="lang-icon">
@@ -3590,6 +3818,63 @@
                             <img src="kofi_symbol.png" alt="Ko-fi" class="kofi-icon-btn">
                             <span data-i18n="modal.donate_btn">Support catalog maintenance</span>
                         </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </dialog>
+
+    <!-- CAMERA INSTALLATION GUIDE MODAL (TOP LAYER DIALOG) -->
+    <dialog id="modalHelpGuide" class="modal-help-dialog" closedby="any" aria-labelledby="guideTitle">
+        <div class="modal-help-window">
+            <div class="modal-help-header">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <span class="guide-badge" style="background: var(--accent); color: #fff; font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 4px; font-family: 'JetBrains Mono', monospace;">EOS GUIDE</span>
+                    <h2 id="guideTitle" style="font-size: 14px; font-weight: 700; color: var(--text-main);" data-i18n="guide.dialog_title">Guía de Instalación en Cámaras Canon EOS</h2>
+                </div>
+                <button class="modal-close-btn" id="btnCloseHelpGuide" type="button" title="Close (Esc)" aria-label="Close guide modal">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+            <div class="modal-help-body">
+                <p style="color: var(--text-muted); font-size: 12px; margin-bottom: 4px;" data-i18n="guide.subtitle">Cómo registrar LUTs 3D y Estilos Nativos en los slots de hardware de tu cámara</p>
+                <div class="guide-columns">
+                    <div class="guide-card is-native">
+                        <div class="guide-card-title" data-i18n="guide.format_native_title">🟣 Estilos Nativos de Canon (.pf3 / .pf2)</div>
+                        <div class="guide-card-tool" data-i18n="guide.format_native_tool">Instalar con: Canon EOS Utility 3</div>
+                        <p style="font-size: 11px; color: var(--text-dim);" data-i18n="guide.format_native_desc">Perfiles analíticos creados en Picture Style Editor (splines 1D, matrices HSL y color selectivo).</p>
+                        <div class="guide-steps" data-i18n="guide.format_native_steps_html">
+                            1. Conecta la cámara por USB (Dial en P/Tv/Av/M, Wi-Fi apagado).<br>
+                            2. Abre EOS Utility 3 → <em>Configuración de la cámara</em> → <em>Registrar archivo de estilo de imagen</em>.<br>
+                            3. Elige Usuario 1, 2 o 3, carga el archivo .pf3/.pf2 y confirma.
+                        </div>
+                    </div>
+                    <div class="guide-card is-lut">
+                        <div class="guide-card-title" data-i18n="guide.format_lut_title">🟢 Emulaciones de Película en LUT (Hald PNG Level 12)</div>
+                        <div class="guide-card-tool" data-i18n="guide.format_lut_tool">Inyectar con: Canon Style Studio</div>
+                        <p style="font-size: 11px; color: var(--text-dim);" data-i18n="guide.format_lut_desc">Mallas volumétricas 3D completas (33³ / 35.937 colores) con emulaciones de película analógica.</p>
+                        <div class="guide-steps" data-i18n="guide.format_lut_steps_html">
+                            1. Cierra EOS Utility por completo.<br>
+                            2. Abre Canon Style Studio → Mantén <em>Base Picture Style</em> en <strong>Neutral</strong>.<br>
+                            3. Pulsa <strong>Add LUT</strong> → selecciona el archivo .png descargado.<br>
+                            4. Pulsa <strong>Send to Camera</strong> → elige ranura (User Def 1-3) → <em>Install independently...</em>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="guide-golden-box">
+                    <div class="guide-golden-title">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                        <span data-i18n="guide.golden_tips_title">Trucos de Oro de Hardware (Validados en M100 y M6 Mark II)</span>
+                    </div>
+                    <div class="guide-tip-item" data-i18n="guide.tip_disabled_slot_html">
+                        <strong>Error 'Slot style envelope is disabled or inconsistent':</strong> El slot no está inicializado en la cámara. <em>Solución infalible:</em> Abre EOS Utility, carga cualquier .pf3 en esa ranura para que Canon formatee la estructura de memoria, cierra EOS Utility y luego inyecta tu LUT con Canon Style Studio.
+                    </div>
+                    <div class="guide-tip-item" data-i18n="guide.tip_controls_mismatch_html">
+                        <strong>Error 'Slot Basic controls differ':</strong> Los ajustes de Contraste, Saturación, Tono o Umbral no coinciden. <em>Solución:</em> Iguala los 4 deslizadores en el panel lateral de Canon Style Studio a los números que indica el reporte de la cámara.
+                    </div>
+                    <div class="guide-tip-item" data-i18n="guide.tip_camera_settings_html">
+                        <strong>Ajustes de la cámara:</strong> Desactiva Wi-Fi/Bluetooth en el menú de la cámara (llave inglesa) y pon el dial en <strong>P, Tv, Av o M</strong>. En modo Auto o Vídeo el bus de Picture Styles queda bloqueado.
                     </div>
                 </div>
             </div>
@@ -4108,8 +4393,19 @@
                 const originInfo = getPresetOrigin(p);
                 const isSpanish = window.I18N && window.I18N.locale === 'es';
                 const originBadgeText = originInfo.isLut ? 'LUT' : (isSpanish ? 'Estilo' : 'Style');
-                const dlTitle = isSpanish ? 'Descargar archivo para cámara' : 'Download file';
-                const dlText = isSpanish ? 'Descargar' : 'Download';
+                let dlTitle, dlText;
+                if (originInfo.isLut) {
+                    dlTitle = isSpanish
+                        ? 'Descargar LUT (.png) — Inyectar con Canon Style Studio'
+                        : 'Download LUT (.png) — Inject with Canon Style Studio';
+                    dlText = 'LUT (.png)';
+                } else {
+                    const ext = p.filename.toLowerCase().endsWith('.pf2') ? '.pf2' : '.pf3';
+                    dlTitle = isSpanish
+                        ? `Descargar Estilo (${ext}) — Instalar con EOS Utility 3`
+                        : `Download Style (${ext}) — Install with EOS Utility 3`;
+                    dlText = isSpanish ? `Estilo (${ext})` : `Style (${ext})`;
+                }
                 const peekTitle = isSpanish ? 'Mantén pulsado o barra espaciadora para ver el original' : 'Hold click or press SPACEBAR to view original';
 
                 card.innerHTML = `
@@ -4130,7 +4426,7 @@
                                 <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
                                 <span>Original</span>
                             </button>
-                            <a class="btn-download-quick" href="${p.download}" download="${p.filename}" title="${dlTitle}">
+                            <a class="btn-download-quick ${originInfo.isLut ? 'is-lut-btn' : 'is-native-btn'}" href="${p.download}" download="${p.filename}" title="${dlTitle}">
                                 <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
                                 <span>${dlText}</span>
                             </a>
@@ -4925,12 +5221,15 @@
                 alert('You have not saved any styles yet.');
                 return;
             }
-            let text = "=== MY SELECTED STYLES FOR CANON EOS ===\n";
+            let text = "=== CANON EOS STYLE MAPPING (TOP 3) ===\n";
             savedPresetsList.slice(0, 3).forEach((s, idx) => {
-                text += `User Def. ${idx+1}: ${s.filename} --> [${s.custom_name}]\n`;
+                const p = window.CANON_PRESETS.find(x => x.id === s.id);
+                const isLut = p ? (!!p.isLut || (p.source && (p.source.includes('source_luts') || p.source.endsWith('.png') || p.source.endsWith('.cube')))) : s.filename.toLowerCase().endsWith('.png');
+                const toolInfo = isLut ? 'Canon Style Studio (Inyectar LUT PNG)' : 'EOS Utility 3 (Registrar .pf3/.pf2)';
+                text += `Slot ${idx+1} [User Def. ${idx+1}]: ${s.filename} --> Herramienta: ${toolInfo} [${s.custom_name}]\n`;
             });
             navigator.clipboard.writeText(text).then(() => {
-                alert(`Copied to clipboard!\n\n${text}`);
+                showToast(window.I18N ? window.I18N.t('toasts.copied_eos') : 'Copied top presets for EOS Utility!');
             });
         }
 
@@ -5258,6 +5557,17 @@
             const dlBtn = document.getElementById('modalDownloadBtn');
             dlBtn.href = p.download;
             dlBtn.download = p.filename;
+            dlBtn.className = `btn-download-modal ${originInfo.isLut ? 'is-lut' : 'is-native'}`;
+            const dlSpan = dlBtn.querySelector('span');
+            const isSpanish = window.I18N && window.I18N.locale === 'es';
+            if (originInfo.isLut) {
+                if (dlSpan) dlSpan.innerText = isSpanish ? 'Descargar LUT (.png) — Canon Style Studio' : 'Download LUT (.png) — Canon Style Studio';
+                dlBtn.title = isSpanish ? 'Descargar Hald PNG Level 12 para inyectar con Canon Style Studio' : 'Download Level 12 Hald PNG to inject with Canon Style Studio';
+            } else {
+                const ext = p.filename.toLowerCase().endsWith('.pf2') ? '.pf2' : '.pf3';
+                if (dlSpan) dlSpan.innerText = isSpanish ? `Descargar Estilo (${ext}) — EOS Utility 3` : `Download Style (${ext}) — EOS Utility 3`;
+                dlBtn.title = isSpanish ? `Descargar Picture Style auténtico (${ext}) para registrar con EOS Utility 3` : `Download authentic Picture Style (${ext}) to register with EOS Utility 3`;
+            }
 
             const starBtn = document.getElementById('modalStarBtn');
             starBtn.classList.toggle('favorited', realFavoritesSet.has(p.id));
@@ -5556,9 +5866,12 @@
                 updateTriageModeUI();
                 applyFitMode();
                 if (currentView === 'grid') {
-                    renderAllVisibleCards();
+                    applyFilters();
                 } else {
                     renderCurrentTriage();
+                }
+                if (modal && modal.open && currentModalIndex >= 0) {
+                    openModal(currentModalIndex);
                 }
                 updateDrawerLists();
                 showToast(window.I18N.t('toasts.lang_switched'));
@@ -5993,6 +6306,44 @@
                 document.getElementById('modalIntensityVal').innerText = `${e.target.value}%`;
                 if (modalLutEngine) modalLutEngine.setIntensity(val);
             });
+
+            // Camera Installation Guide Modal Controls
+            const btnHelp = document.getElementById('btnHelpGuide');
+            const modalHelp = document.getElementById('modalHelpGuide');
+            const btnCloseHelp = document.getElementById('btnCloseHelpGuide');
+
+            if (btnHelp && modalHelp) {
+                btnHelp.addEventListener('click', () => {
+                    if (typeof modalHelp.showModal === 'function') {
+                        modalHelp.showModal();
+                    } else {
+                        modalHelp.setAttribute('open', '');
+                    }
+                });
+            }
+
+            if (btnCloseHelp && modalHelp) {
+                btnCloseHelp.addEventListener('click', () => {
+                    if (typeof modalHelp.close === 'function') {
+                        modalHelp.close();
+                    } else {
+                        modalHelp.removeAttribute('open');
+                    }
+                });
+            }
+
+            if (modalHelp) {
+                modalHelp.addEventListener('click', (e) => {
+                    const win = modalHelp.querySelector('.modal-help-window');
+                    if (win && !win.contains(e.target)) {
+                        if (typeof modalHelp.close === 'function') {
+                            modalHelp.close();
+                        } else {
+                            modalHelp.removeAttribute('open');
+                        }
+                    }
+                });
+            }
         }
 
         // ==========================================

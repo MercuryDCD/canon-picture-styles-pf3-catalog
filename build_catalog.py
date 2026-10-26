@@ -47,6 +47,7 @@ def parse_catalog_markdown() -> dict:
             if not m:
                 continue
             fn = m.group(1).strip()
+            stem_lower = Path(fn).stem.lower()
             author = parts[2].replace("<br>", " ").strip()
             source = parts[3].replace("`", "").strip()
             profile_text = parts[4]
@@ -55,13 +56,15 @@ def parse_catalog_markdown() -> dict:
             best_m = re.search(r"\*\*Best for:\*\*\s*(.*?)(?:<br>|$)", profile_text)
             herit_m = re.search(r"\*\*Heritage:\*\*\s*(.*?)(?:<br>|$)", profile_text)
 
-            meta[fn.lower()] = {
+            entry = {
                 "author": author,
                 "source": source,
                 "look": look_m.group(1).strip() if look_m else "",
                 "bestFor": best_m.group(1).strip() if best_m else "",
                 "heritage": herit_m.group(1).strip() if herit_m else ""
             }
+            meta[fn.lower()] = entry
+            meta[stem_lower] = entry
 
     print(f"[+] Parsed metadata from markdown: {len(meta)} entries.")
     return meta
@@ -74,14 +77,19 @@ def build_data():
 
     cat_dirs = sorted([d for d in REPO_DIR.iterdir() if d.is_dir() and d.name[:2].isdigit()])
 
+    VALID_EXTS = {".pf3", ".pf2", ".png", ".cube"}
+
     for cat_dir in cat_dirs:
         cat_name = cat_dir.name
         cat_label = cat_name.split("_", 1)[1].replace("_", " ")
         cat_num = int(cat_name[:2])
         color_info = CATEGORY_COLORS.get(cat_name, {"bg": "rgba(255,255,255,0.1)", "border": "#64748b", "badge": "#475569"})
 
-        # Presets in this category
-        preset_files = sorted(list(cat_dir.glob("*.pf3")) + list(cat_dir.glob("*.pf2")), key=lambda p: p.name.lower())
+        # Presets in this category: native styles (.pf3/.pf2) and film simulation LUTs (.png/.cube)
+        preset_files = sorted(
+            [f for f in cat_dir.iterdir() if f.is_file() and f.suffix.lower() in VALID_EXTS],
+            key=lambda p: p.name.lower()
+        )
         cat_count = len(preset_files)
 
         categories.append({
@@ -93,26 +101,26 @@ def build_data():
         })
 
         for pf in preset_files:
-            fn_lower = pf.name.lower()
-            m = meta_dict.get(fn_lower, {})
+            stem = pf.stem
+            stem_lower = stem.lower()
+            m = meta_dict.get(stem_lower, meta_dict.get(pf.name.lower(), {}))
 
-            lut_rel = f"{cat_name}/luts_bin/{pf.stem}.bin"
+            lut_rel = f"{cat_name}/luts_bin/{stem}.bin"
             lut_exists = (REPO_DIR / lut_rel).exists()
 
             download_rel = f"{cat_name}/{pf.name}"
+            is_lut = pf.suffix.lower() in {".png", ".cube"}
 
             # Synthesize descriptions if missing
             look = m.get("look") or f"{cat_label} color profile calibrated for Canon EOS cameras."
             best_for = m.get("bestFor") or "General photography, travel, and portraiture."
             heritage = m.get("heritage") or cat_label
-            author = m.get("author") or "Canon EOS Community"
-            raw_source = m.get("source") or ""
-            source = re.sub(r"^presets Canon\.pf3/", "", raw_source)
-            is_lut = "source_luts" in source or source.lower().endswith(".png") or source.lower().endswith(".cube")
+            author = m.get("author") or ("Pat David & Open-Source Community" if is_lut else "Canon EOS Community")
+            source = f"{cat_name}/{pf.name}"
 
             presets.append({
-                "id": f"{cat_name}__{pf.stem}",
-                "name": clean_title(pf.stem),
+                "id": f"{cat_name}__{stem}",
+                "name": clean_title(stem),
                 "filename": pf.name,
                 "cat": cat_name,
                 "catLabel": cat_label,

@@ -160,6 +160,24 @@
                 next_btn: "Next",
                 donate_btn: "Support catalog maintenance"
             },
+            guide: {
+                btn_label: "Guide",
+                btn_title: "Camera Installation Guide & Compatibility",
+                dialog_title: "Canon EOS Camera Installation Guide",
+                subtitle: "How to register 3D LUTs and Native Picture Styles to your camera hardware",
+                format_native_title: "🟣 Native Canon Styles (.pf3 / .pf2)",
+                format_native_desc: "Authentic styles created with Canon Picture Style Editor (1D curves, color matrix & selective color).",
+                format_native_tool: "Install via: Canon EOS Utility 3",
+                format_native_steps_html: "1. Connect camera via USB (Dial in P/Tv/Av/M, Wi-Fi off).<br>2. Open EOS Utility 3 → <em>Camera settings</em> → <em>Register Picture Style File</em>.<br>3. Select User Def. 1, 2, or 3, load the .pf3/.pf2 file and confirm.",
+                format_lut_title: "🟢 Film Simulation LUTs (Hald PNG Level 12)",
+                format_lut_desc: "Full 3D volumetric color transformations (33³ / 35,937 colors) emulating analog film stocks.",
+                format_lut_tool: "Inject via: Canon Style Studio",
+                format_lut_steps_html: "1. Close EOS Utility completely.<br>2. Open Canon Style Studio → Keep <em>Base Picture Style</em> on <strong>Neutral</strong>.<br>3. Click <strong>Add LUT</strong> → choose the downloaded .png file.<br>4. Click <strong>Send to Camera</strong> → choose slot (User Def 1-3) → <em>Install independently...</em>",
+                golden_tips_title: "⚡ Golden Troubleshooting Tips (Hardware Validated)",
+                tip_disabled_slot_html: "<strong>Error 'Slot style envelope is disabled or inconsistent':</strong> The slot is uninitialized in the camera. <em>Foolproof fix:</em> Open EOS Utility, register any .pf3 into that slot to format the memory structure, close EOS Utility, and then inject your LUT in Canon Style Studio.",
+                tip_controls_mismatch_html: "<strong>Error 'Slot Basic controls differ':</strong> Contrast, Saturation, Tone, or Threshold don't match. <em>Fix:</em> Match the 4 sliders in Canon Style Studio's sidebar with the values shown in the camera report.",
+                tip_camera_settings_html: "<strong>Camera Settings:</strong> Turn off Wi-Fi/Bluetooth in camera menu (yellow wrench) and set mode dial to <strong>P, Tv, Av, or M</strong>. Auto/Movie mode disables Picture Style transfer."
+            },
             donation: {
                 badge: "Support",
                 title: "Support this Catalog",
@@ -363,6 +381,24 @@
                 prev_btn: "Anterior",
                 next_btn: "Siguiente",
                 donate_btn: "Apoyar mantenimiento del catálogo"
+            },
+            guide: {
+                btn_label: "Guía",
+                btn_title: "Guía de Instalación en Cámara y Compatibilidad",
+                dialog_title: "Guía de Instalación en Cámaras Canon EOS",
+                subtitle: "Cómo registrar LUTs 3D y Estilos Nativos en los slots de hardware de tu cámara",
+                format_native_title: "🟣 Estilos Nativos de Canon (.pf3 / .pf2)",
+                format_native_desc: "Perfiles analíticos creados en Picture Style Editor (splines 1D, matrices HSL y color selectivo).",
+                format_native_tool: "Instalar con: Canon EOS Utility 3",
+                format_native_steps_html: "1. Conecta la cámara por USB (Dial en P/Tv/Av/M, Wi-Fi apagado).<br>2. Abre EOS Utility 3 → <em>Configuración de la cámara</em> → <em>Registrar archivo de estilo de imagen</em>.<br>3. Elige Usuario 1, 2 o 3, carga el archivo .pf3/.pf2 y confirma.",
+                format_lut_title: "🟢 Emulaciones de Película en LUT (Hald PNG Level 12)",
+                format_lut_desc: "Mallas volumétricas 3D completas (33³ / 35.937 colores) con emulaciones de película analógica.",
+                format_lut_tool: "Inyectar con: Canon Style Studio",
+                format_lut_steps_html: "1. Cierra EOS Utility por completo.<br>2. Abre Canon Style Studio → Mantén <em>Base Picture Style</em> en <strong>Neutral</strong>.<br>3. Pulsa <strong>Add LUT</strong> → selecciona el archivo .png descargado.<br>4. Pulsa <strong>Send to Camera</strong> → elige ranura (User Def 1-3) → <em>Install independently...</em>",
+                golden_tips_title: "⚡ Trucos de Oro de Hardware (Validados en M100 y M6 Mark II)",
+                tip_disabled_slot_html: "<strong>Error 'Slot style envelope is disabled or inconsistent':</strong> El slot no está inicializado en la cámara. <em>Solución infalible:</em> Abre EOS Utility, carga cualquier .pf3 en esa ranura para que Canon formatee la estructura de memoria, cierra EOS Utility y luego inyecta tu LUT con Canon Style Studio.",
+                tip_controls_mismatch_html: "<strong>Error 'Slot Basic controls differ':</strong> Los ajustes de Contraste, Saturación, Tono o Umbral no coinciden. <em>Solución:</em> Iguala los 4 deslizadores en el panel lateral de Canon Style Studio a los números que indica el reporte de la cámara.",
+                tip_camera_settings_html: "<strong>Ajustes de la cámara:</strong> Desactiva Wi-Fi/Bluetooth en el menú de la cámara (llave inglesa) y pon el dial en <strong>P, Tv, Av o M</strong>. En modo Auto o Vídeo el bus de Picture Styles queda bloqueado."
             },
             donation: {
                 badge: "Apoyo",
