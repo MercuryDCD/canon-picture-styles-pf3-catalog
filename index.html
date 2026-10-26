@@ -6,9 +6,10 @@
     <meta name="color-scheme" content="dark">
     <title>Canon Picture Styles — Interactive Catalog & Fast Triage</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="icon" type="image/png" href="favicon.png">
-    <link rel="icon" type="image/jpeg" href="samples/01_portrait_skin.jpg">
-    <link rel="apple-touch-icon" href="samples/01_portrait_skin.jpg">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -783,8 +784,19 @@
         .brand-box {
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
             margin-right: 1px;
+        }
+
+        .brand-avatar-img {
+            width: 19px;
+            height: 19px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: inline-block;
+            flex-shrink: 0;
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
         }
 
         .brand-badge {
@@ -3305,6 +3317,7 @@
         <!-- GLOBAL LEFT: BRAND + VIEW TABS + PHOTO PICKER -->
         <div class="header-left">
             <div class="brand-box" title="Canon Picture Styles Suite">
+                <img src="favicon-32x32.png" alt="Canon Picture Styles Icon" class="brand-avatar-img">
                 <span class="brand-badge">EOS</span>
                 <span class="brand-title" data-i18n="brand.title">Picture Styles</span>
             </div>

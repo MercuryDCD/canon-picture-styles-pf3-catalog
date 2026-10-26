@@ -156,6 +156,26 @@ Before connecting your camera via USB:
 
 ---
 
+### 🧰 Canon Style Studio: Origin, Architecture & Setup
+
+#### 1. Why was it created? (Origin & Background)
+For years, photographers attempting to load external 3D film simulation LUTs (`.cube` or Hald PNG) onto Canon cameras faced an insurmountable firmware limitation:
+* **The Canon Compiler Flaw:** Canon's official compiler library (**`EdsCFParse.dll`**, utilized by EOS Utility 3 and Picture Style Editor) silently normalizes/flattens any volumetric 3D LUT table (`0x40001070`) to flat **Neutral** unless the style was analytically built with Picture Style Editor's own limited spline tools.
+* **The Obsolete `.pf3` Workaround:** Generating static `.pf3` containers from 3D LUTs for transfer via EOS Utility resulted in a profile that flashed cleanly but produced **zero visible color effect** in-camera (and was ignored by DPP 4 on PC).
+* **The Breakthrough:** Independent researcher and developer **LvClFER** reverse-engineered the low-level Canon camera firmware communication protocols, reconstructing the **10 serializer families** across DIGIC processors (from DIGIC 4 legacy carriers up to DIGIC 7, DIGIC 8, and DIGIC X, spanning 77+ camera compiler identifiers). By synthesizing the exact hardware carrier blocks directly (e.g., 16,752 bytes for DIGIC 7 in EOS M100; 16,712 bytes for DIGIC 8 in EOS M6 Mark II / RP / R8) and communicating via **Windows Portable Devices (WPD / PTP)**, **Canon Style Studio** bypasses Canon's official software limitations and allows true 3D volumetric LUTs to be permanently baked by the camera's DIGIC hardware in real-time (*SOOC*).
+
+#### 2. Installation & Portable Setup
+Canon Style Studio is distributed as a **portable, standalone Windows application** with zero installer friction:
+* **Operating System:** Windows 10 or Windows 11 (64-bit).
+* **Standalone Architecture:** It embeds its own private Python runtime, Qt/PySide GUI, and mathematical libraries. **No Python installation, no command line, and no `pip install` packages are required.**
+* **How to Run:**
+  1. Extract the `CanonStyleStudio/` folder to any writable local directory on your PC (e.g. `C:\Users\Dani\Pictures\pruebas preset\CanonStyleStudio`).
+  2. Double-click **`START_CANON_STYLE_STUDIO.bat`** (or execute **`CanonStyleStudio.exe`**).
+  3. **Portable Workspace:** Projects and cipher initialization states are stored locally in your Windows `Documents/Canon Style Studio PF3/` folder, with diagnostics saved under `app_data/`.
+* **Optional Canon RAW Engine:** Canon Digital Photo Professional (DPP) is **not required**. If you wish to preview Canon RAW files (`.CR3` / `.CR2`) directly inside the editor, you can click **Locate PSE…** and select your Canon Picture Style Editor installation folder (to borrow `DPP4Lib`). However, for flashing film simulations and LUTs into your camera, **no Canon software installation is required at all**.
+
+---
+
 ### Method 1: Film Simulation LUTs (.png Hald Level 12) via Canon Style Studio
 
 Use this method for all film simulations downloaded as `.png`:
